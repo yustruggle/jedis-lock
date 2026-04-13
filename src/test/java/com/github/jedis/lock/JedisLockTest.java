@@ -20,7 +20,7 @@ public class JedisLockTest {
 	public void testAcquire() throws InterruptedException {
 		Jedis jedis = new Jedis(redis1.host, redis1.port);
         jedis.connect();
-        jedis.auth("foobared");
+        jedis.auth("redis");
 
 		JedisLock lock = new JedisLock(jedis, "testlock2");
 		assertTrue(lock.acquire());
@@ -48,7 +48,7 @@ public class JedisLockTest {
 			public void run() {
 				Jedis jedis = new Jedis(redis1.host, redis1.port);
 		        jedis.connect();
-		        jedis.auth("foobared");
+		        jedis.auth("redis");
 
 				for (int i = 0; i < count; i++) {
 					JedisLock lock = new JedisLock(jedis, "testlock", 15000, 200);
@@ -71,7 +71,7 @@ public class JedisLockTest {
 			public void run() {
 				Jedis jedis = new Jedis(redis1.host, redis1.port);
 		        jedis.connect();
-		        jedis.auth("foobared");
+		        jedis.auth("redis");
 
 				for (int i = 0; i < count; i++) {
 					JedisLock lock = new JedisLock(jedis, "testlock", 15000, 200);
